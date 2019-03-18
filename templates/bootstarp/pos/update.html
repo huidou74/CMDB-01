@@ -1,0 +1,88 @@
+{%  extends 'bootstarp/main.html' %}
+{% block pos_up %}
+    <br>
+    <div class="grid-form1">
+       <h3>添加 岗位用户</h3>
+    <br>
+          <div class="tab-content">
+             <div class="tab-pane active"  id="horizontal-form1">
+                <div class="form-group">
+                <label for="focusedinput" class="col-sm-2 control-label">当前选择的用户名：</label>
+                   <div class="col-sm-8" id="name"  style=" color: #00C6D7;">
+                      {{ userinfo_name }}
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                <label for="focusedinput" class="col-sm-2 control-label">对应用户的岗位名：</label>
+                   <div class="col-sm-8" id="name" style=" color: #00C6D7;">
+                      {{ userinfo_name.pos }}
+                    </div>
+                </div>
+                <br>
+                 <hr>
+                <br>
+
+                <form class="form-horizontal" method='post' id="remove" name="remove" method='post' role='form' novalidate >
+                <div class="form-group">
+                <label for="focusedinput" class="col-sm-2 control-label" style=" color: green;">
+                    当前用户的权限名：
+                    <br>
+                   （支持多选）：
+                </label>
+                {% csrf_token %}
+                    <div class="col-sm-3">
+                    <select  name="remove_id" style=" width: 220px; height: 200px;"  multiple>
+                        {% for i in userinfo_name.pos.auth.all %}
+                            <option value="{{ i.id }}" style="color: deeppink">{{ i }}</option>
+                            <option value="0"> -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - </option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div class="col-sm-3">
+                    <input name="remove" class="btn-primary btn"  type="submit" value="Remove">
+                        </div>
+                <div class="form-group">
+                    <div class="col-sm-3" style="color: #de0000 ;">
+                    {{ mes2 }}{{ error }}
+                    </div>
+                </div>
+                    </div>
+                </form>
+
+    <hr>
+             <br>
+              <form class="form-horizontal" method='post' id="add" name="add" role='form' novalidate  >
+                <div class="form-group">
+
+                <label for="focusedinput" class="col-sm-2 control-label" style=" color: green;">
+                    选择添加的权限
+                <br>
+                   （支持多选）：
+                </label>
+
+                {% csrf_token %}
+                    <div class="col-sm-3">
+                     <select  name="add_id" style=" width: 220px; height: 220px;"  multiple>
+                        {% for i in auth_name %}
+                            <option value="{{ i.id }}" style=" color: orangered;">{{ i }}</option>
+                            <option value="0"> -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - </option>
+                        {% endfor %}
+                    </select>
+
+                    </div>
+                <div class="col-sm-3">
+                    <input  type="submit" name="add" class="btn-primary btn" value="Add">
+                </div>
+                 <div class="form-group">
+                    <div class="col-sm-3" style="color: chartreuse;">
+                    {{ mes1 }}{{ error }}
+                    </div>
+                </div>
+                 </div>
+                 </form>
+             </div>
+          </div>
+    </div>
+       {% endblock %}

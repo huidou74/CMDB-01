@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{#    1、配置默认选中，只需在对应选项中加上属性 selected； #}
+{#    2、使用django模板语法 {% if condition %} selected {% endif %} ，当为所要选项时，加上属性 selected。 #}
+    <h3>创建主机页面</h3>
+    <form method="post">
+        {% csrf_token %}
+        <p>主机名 ：  <input type="text" name="hostname"></p>
+        {% for i in attr %}
+            {% csrf_token %}
+            <p>{{ i.name }} ：  <input type="text" name="{{ i.name }}"></p>
+        {% endfor %}
+        {% csrf_token %}
+        <p>是否确认提交：  <input type="submit" value="确认"> </p>
+    </form>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'bootstarp/main.html' %}
+{% block message %}
+
+<div class="agile-grids">
+<div class="agile-tables">
+<h3>当前主机详细</h3>
+    <br>
+    <div class=" row mb40">
+    <div class="bs-example">
+        <div class="col-md-6">
+            <a href="/host/list/"><button type="button" class="btn btn-info"> 返回 </button></a>
+        </div>
+    </div>
+    </div>
+    <div class="w3l-table-info">
+            <table id="table">
+        <thead class="table table-bordered table-hover" id="table">
+                <tr>
+                    <th> ID </th>
+                    <th>  主机名  </th>
+                    <th>  实例名  </th>
+                    <th>  CPU  </th>
+                    <th>  内存  </th>
+                    <th>  磁盘  </th>
+                    <th>  带宽  </th>
+                    <th>  登录端口  </th>
+                    <th>  公网IP  </th>
+                    <th>  私网IP  </th>
+                    <th>  主机状态 </th>
+                    <th>  内核版本  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ host_obj.id }}</td>
+                    <td>{{ host_obj }}</td>
+                    <td> {{ host_obj.ecsname }} </td>
+                    <td> {{ host_obj.cpu }} </td>
+                    <td> {{ host_obj.mem }} </td>
+                    <td> {{ disk }} </td>
+                    <td> {{ host_obj.speed }} </td>
+                    <td> {{ host_obj.login_port }} </td>
+                    <td> {{ host_obj.eth1_network }} </td>
+                    <td> {{ host_obj.eth0_network }} </td>
+                    <td> {{ host_obj.get_state_display  }} </td>
+                    <td> {{ host_obj.kernel }} </td>
+                </tr>
+            </tbody>
+    </table >
+    </div>
+    <br>
+        <div class="w3l-table-info">
+            <table id="table">
+            <thead class="table table-bordered table-hover" id="table">
+                <tr>
+                    <th> </th>
+                    <th>  操作系统  </th>
+                    <th>  来源IP  </th>
+                    <th>  创建时间  </th>
+                    <th>  到期时间  </th>
+                    <th>  所属用户  </th>
+                    <th>  标签  </th>
+                    <th>  SN  </th>
+                    <th>  备注  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td> {{ host_obj.os }} </td>
+                    <td> {{ host_obj.source }} </td>
+                    <td> {{ host_obj.createtime }} </td>
+                    <td> {{ host_obj.expirytime }} </td>
+                    <td> {{ login }} </td>
+                    <td> {{ host_obj.lab }} </td>
+                    <td> {{ host_obj.sn }} </td>
+                    <td> {{ host_obj.remarks }} </td>
+                </tr>
+            </tbody>
+     </table>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

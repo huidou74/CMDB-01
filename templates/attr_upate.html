@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+
+    <p> {{ user }}  云主机的原始值 ： {{ attr }}</p>
+
+    <label>特殊属性的修改： </label>
+
+    <select name="class">
+        {% for i in attr_new %}
+            <option value="{{ i.id }}"{% if i.name == 'dick'%} selected {% endif %}>{{ i.name }}</option>
+        {% endfor %}
+    </select>
+
+            {% if value == 'Disk'%}
+                <select name="class_disk">
+                    {% for i in attr_disk %}
+                        <option value="{{ i.id }}"{% if i.size == ''%} selected {% endif %}>{{ i.size }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <p>请确认 ：  <input type="submit"  value="OK"> </p>
+            {% endif %}
+            {% if value == 'Login' %}
+                <select name="class_login">
+                    {% for i in attr_login %}
+                        <option value="{{ i.id }}"{% if i.username == ''%} selected {% endif %}>{{ i.username }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <p>请确认 ：  <input type="submit"  value="OK"> </p>
+            {% endif %}
+            {% if value == 'Os' %}
+                <select name="class_os">
+                    {% for i in attr_os %}
+                        <option value="{{ i.id }}"{% if i.name == ''%} selected {% endif %}>{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <p>请确认 ：  <input type="submit"  value="OK"> </p>
+            {% endif %}
+            {% if value == 'Lable' %}
+                <select name="class_lable">
+                    {% for i in attr_lable %}
+                        <option value="{{ i.id }}"{% if i.name == ''%} selected {% endif %}>{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <p>请确认 ：  <input type="submit"  value="OK"> </p>
+            {% endif %}
+            {% if value == 'Source' %}
+                <select name="class_source">
+                    {% for i in attr_source %}
+                        <option value="{{ i.id }}"{% if i.name == ''%} selected {% endif %}>{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <p>请确认 ：  <input type="submit"  value="OK"> </p>
+            {% endif %}
+
+
+
+
+    </form>
+{% endblock %}

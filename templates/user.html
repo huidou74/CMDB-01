@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h>登陆成功！</h>
+    <p>你的用户名是： {{ username }}</p>
+    <p>你的密码是  ： {{ password }}</p>
+    <p>来了，老弟！   今日自拍，爱你呦</p>
+    <img src="{% static "./images/lc.png" %}" height=370 width=245 />
+    <p>退出登录：   <a href="/delete_session/"><button>Logout</button></a></p>
+    <p>修改用户密码：   <a href="/update/"><button>点击修改密码</button></a></p>
+    <p>找回用户密码：   <a href="/reload/"><button>点击找回密码</button></a></p>
+    <p>删除用户信息：   <a href="/delete/"><button>点击删除用户</button></a></p>
+    <p>查看所有的用户信息：   <a href="/date/"><button>点击查看</button></a></p>
+    <p>查看所有主机的信息( 旧 )：   <a href="/host/"><button>Go Hosts</button></a></p>
+    <p>查看所有主机的信息( 新 )：   <a href="/host/list/"><button>Go Hosts</button></a></p>
+{% endblock %}

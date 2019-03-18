@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>删除所选用户 ！</h3>
+    <p>提示： 删除前必须输入该用户的正确密码！ 否则不准删除</p>
+    <form method="post">
+        {% csrf_token %}
+        <p>需要删除的用户名： </p><input type="test" name="user">
+        <p>该删除用户的密码： </p><input type="password" name="passwd">
+        <p>是否确认删除： yse & no </p><input  type="test" name="y_n">
+        <p>   ---->  <input type="submit" value="提交">  <---- </p>
+    </form>
+{% endblock %}

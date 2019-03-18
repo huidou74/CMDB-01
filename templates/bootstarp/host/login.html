@@ -1,0 +1,50 @@
+{% extends 'bootstarp/login.html' %}
+{% block form %}
+
+		<form method='POST' novalidate>
+            {% csrf_token %}
+            <div class="user-name ">用户名:</div>
+
+			<li>
+                {{form.username}}
+{#				<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>#}
+
+            </li>
+{#				<div class="clear"> </div>#}
+            <div class="user-name ">密码:</div>
+			<li>
+                {{form.password}}
+{#				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>#}
+
+            </li>
+            <div class="user-name "> 验证码:</div>
+            <li>
+                <input type="text" class="form-control" name="code">
+            </li>
+            <li>
+                <img src="/code.html" onclick="CodeImg(this);" style="width: 205px;height: 50px;">
+            </li>
+
+{#           <div class="user-name "> 确认密码:</div>#}
+{#            <li>#}
+{#                {{form.password_again}}#}
+{#            </li>#}
+            <li>
+                {{form.errors.username.0}}
+                {{form.errors.password.0}}
+                {{ mes_error }}
+            </li>
+{#			<div class="clear"> </div>#}
+			<div class="submit">
+				<input type="submit"  value="登录" >
+				<h4><a href="#">Lost your Password ?</a></h4>
+						  <div class="clear">  </div>	
+			</div>
+				
+		</form>
+    <script>
+        function CodeImg(ths) {
+        ths.src = ths.src + "?";
+        }
+    </script>
+{% endblock %}

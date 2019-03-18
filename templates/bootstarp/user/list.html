@@ -1,0 +1,61 @@
+{%  extends 'bootstarp/main.html' %}
+{% block user_list %}
+
+    <div class="agile-grids">
+    <div class="agile-tables">
+
+       <div class="w3l-table-info">
+       <h3>登陆用户   总共：{{ num }}</h3>
+          <table id="table">
+          <thead>
+             <tr>
+                 <th>ID</th>
+                 <th>用户名</th>
+                 <th>密码 (base64 加密)</th>
+             </tr>
+          </thead>
+          <tbody>
+
+                {% for i in date_user %}
+                    <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i }}</td>
+                <td>{{ i.password }}</td>
+                    </tr>
+                {% endfor %}
+
+          </tbody>
+
+          </table>
+       </div>
+
+    <br>
+    {% if '/user/delete/(\d+)/' in request.permission_code_list %}
+    <div class="w3l-table-info">
+    <h3>权限用户   总共：{{ num_auth }}</h3>
+          <table id="table">
+          <thead>
+             <tr>
+                 <th>ID</th>
+                 <th>用户名</th>
+                 <th>密码  (未加密)</th>
+             </tr>
+          </thead>
+          <tbody>
+                {% for x in date_auth %}
+                    <tr>
+                <td>{{ x.id }}</td>
+                <td>{{ x }}</td>
+                <td>{{ x.passwd }}</td>
+                    </tr>
+                {% endfor %}
+          </tbody>
+
+          </table>
+       </div>
+    {% endif %}
+
+
+    </div>
+    </div>
+{% endblock %}

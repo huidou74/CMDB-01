@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id='auth_index'>
+   {% for i in menu_dict.values %}
+      <h2>{{i.title}}</h2>
+      {% for ii in i.lower %}
+          <div>
+              <a href="{{ii.url}}">{{ii.name}}</a>
+          </div>
+      {% endfor %}
+    {% endfor %}
+    </div>
+
+
+
+{% endblock %}

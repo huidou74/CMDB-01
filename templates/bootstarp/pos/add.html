@@ -1,0 +1,116 @@
+{%  extends 'bootstarp/main.html' %}
+{% block pos_add %}
+    <br>
+    <div class="grid-form1">
+  	       <h3>添加 岗位用户</h3>
+    <a href="/position/list/"> <button type="button" class="btn btn-system">返回</button> </a>
+  	         <div class="tab-content">
+						<div class="tab-pane active"  id="horizontal-form1">
+							<form class="form-horizontal" method='post' id="user" name="user" role='form' novalidate>
+								{% csrf_token %}
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">用户名：</label>
+									<div class="col-sm-8" id="name">
+										{{ form1.name }}
+									</div>
+								</div>
+
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 密码： </label>
+									<div class="col-sm-8" id="passwd">
+										{{ form1.passwd }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 确认密码： </label>
+									<div class="col-sm-8" id="password_t">
+										{{ form1.passwd_t }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 对应岗位： </label>
+									<div class="col-sm-8" id="pos_id">
+										{{ form1.pos_id }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 返回结果： </label>
+									<div class="col-sm-8" >
+                                        {% if f_JG %}
+                                        创建成功，用户名 ： {{ f_JG }}
+                                        {% else %}
+                                        {{ form1.errors.name }}
+                                        {{ form1.errors.passwd }}
+                                        {{ form1.errors.passwd_t }}
+										{{ form1.errors.pos_id }}
+                                        {% endif %}
+									</div>
+								</div>
+{#                                 提交按钮#}
+                                <div class="panel-footer">
+                                        <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <input type="submit" name="user" class="btn-primary btn" value="提交">
+                                        </div>
+                                    </div>
+                                </div>
+							</form>
+						</div>
+			 </div>
+    </div>
+
+    <div class="grid-form1">
+            <h3>添加 职责岗位</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form2">
+							<form class="form-horizontal" id="pos" method='post' role='form' name="pos" novalidate>
+								{% csrf_token %}
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">岗位名</label>
+									<div class="col-sm-8" id="pos">
+										{{ form2.name }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 确认创建 </label>
+									<div class="col-sm-8" id="if_y_n">
+                                        <div class="btn-group" data-toggle="buttons">
+                                          <label class="btn btn-primary">
+                                            <input type="radio" name="y" id="y1" autocomplete="off" > Yes
+                                          </label>
+
+                                          <label class="btn btn-primary">
+                                            <input type="radio" name="n" id="n1" autocomplete="off"> No
+                                          </label>
+                                        </div>
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 添加对应岗位用户 </label>
+									<div class="col-sm-8" id="name_id" style="height: 200px;">
+										{{ form2.name_id | lower}}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 返回结果： </label>
+									<div class="col-sm-8" >
+                                        {{ yn_error }}
+                                        {{ form2.errors.name }}
+									</div>
+								</div>
+{#                                 提交按钮#}
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <input type="submit" name="pos" class="btn-primary btn" value="提交">
+                                        </div>
+                                    </div>
+                                </div>
+							</form>
+						</div>
+			 </div>
+
+  </div>
+
+
+{% endblock %}

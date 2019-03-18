@@ -1,0 +1,188 @@
+{% extends 'bootstarp/main.html' %}
+{% block form %}
+<br>
+
+  <div class="grid-form1">
+  	       <h3>添加主机数据</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" method='post' role='form' novalidate>
+								{% csrf_token %}
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">主机名</label>
+									<div class="col-sm-8" id="hostname" style="color: red;">
+										{{ form.hostname }} {{ form.errors.hostname }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">实例名</label>
+									<div class="col-sm-8" id="ecsname" style="color: red;">
+										{{ form.ecsname }} {{ form.errors.ecsname }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 登录端口 </label>
+									<div class="col-sm-8"  id="login_port" style="color: red;">
+										{{ form.login_port }}  {{ form.errors.login_port }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> CPU </label>
+									<div class="col-sm-8" id="cpu" style="color: red;">
+										{{ form.cpu }} {{ form.errors.cpu }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 内存/G </label>
+									<div class="col-sm-8" id="mem" style="color: red;">
+										{{ form.mem }} {{ form.errors.mem }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 带宽/M </label>
+									<div class="col-sm-8" id="speed" style="color: red;">
+										{{ form.speed }} {{ form.errors.speed }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 公网IP </label>
+									<div class="col-sm-8" id="eth1_network"  style="color: red;">
+										{{ form.eth1_network }} {{ form.errors.eth1_network }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 私网IP </label>
+									<div class="col-sm-8" id="eth0_network" style="color: red;">
+										{{ form.eth0_network }} {{ form.errors.eth0_network }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> SN </label>
+									<div class="col-sm-8" id="sn" style="color: red;">
+										{{ form.sn }} {{ form.errors.sn }}
+ 									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 内核 </label>
+									<div class="col-sm-8" id="kernel" style="color: red;" >
+										{{ form.kernel }} {{ form.errors.kernel }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 备注 </label>
+									<div class="col-sm-8"  id="remarks" style="color: red;">
+										{{ form.remarks }} {{ form.errors.remarks }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 创建时间 </label>
+									<div class="col-sm-8" id="createtime" style="color: red;">
+										{{ form.createtime }} {{ form.errors.createtime }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 到期时间 </label>
+									<div class="col-sm-8" id="expirytime" style="color: red;">
+										{{ form.expirytime }} {{ form.errors.expirytime }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 主机状态 </label>
+									<div class="col-sm-8" id="state" style="color: red;">
+										{{ form.state }} {{ form.errors.state }} {{ message }}
+									</div>
+								</div>
+								<!--<div class="form-group">      # 禁止输入-->
+									<!--<label for="disabledinput" class="col-sm-2 control-label">Disabled Input</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input disabled="" type="text" class="form-control1" id="disabledinput" placeholder="Disabled Input">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="form-group">    # Password 密码框-->
+									<!--<label for="inputPassword" class="col-sm-2 control-label">Password</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="password" class="form-control1" id="inputPassword" placeholder="Password">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="form-group">       # 单选框  -->
+									<!--<label for="checkbox" class="col-sm-2 control-label">Checkbox</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<div class="checkbox-inline1"><label><input type="checkbox"> Unchecked</label></div>-->
+										<!--<div class="checkbox-inline1"><label><input type="checkbox" checked=""> Checked</label></div>-->
+										<!--<div class="checkbox-inline1"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>-->
+										<!--<div class="checkbox-inline1"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>-->
+									<!--</div>-->
+								<!--</div>-->
+{#                                    <p id='lab'>标签: {{form.lab_id}} {{form.errors.lab_id.0}}</p>#}
+{#                                    <p id='os'>操作系统: {{form.os_id}} {{form.errors.os_id.0}}</p>#}
+{#                                    <p id='source'>来源类型: {{form.source_id}} {{form.errors.source_id.0}}</p>#}
+{#                                    <p id='region'>所属区域: {{form.region_id}} {{form.errors.region_id.0}}</p>#}
+
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 标签 </label>
+									<div class="col-sm-8" id="lab" style="color: red;">
+										{{ form.lab_id }} {{ form.errors.lab_id }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 操作系统 </label>
+									<div class="col-sm-8" id="os" style="color: red;">
+										{{ form.os_id }} {{ form.errors.os_id }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 来源类型 </label>
+									<div class="col-sm-8" id="source" style="color: red;">
+										{{ form.source_id }} {{ form.errors.source_id }}
+									</div>
+								</div>
+                                <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label"> 所属区域 </label>
+									<div class="col-sm-8" id="region" style="color: red;">
+										{{ form.region_id }} {{ form.errors.region_id }}
+									</div>
+								</div>
+{#								<div class="form-group">         单选下拉框#}
+{#									<label for="selector1" class="col-sm-2 control-label">标签</label>#}
+{#									<div class="col-sm-8"><select name="selector1" id="selector1" class="form-control1">#}
+{#										<option>Lorem ipsum dolor sit amet.</option>#}
+{#										<option>Dolore, ab unde modi est!</option>#}
+{#										<option>Illum, fuga minus sit eaque.</option>#}
+{#										<option>Consequatur ducimus maiores voluptatum minima.</option>#}
+{#									</select></div>#}
+{#								</div>#}
+								<!--<div class="form-group">     # 多选框-->
+									<!--<label class="col-sm-2 control-label">Multiple Select</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<select multiple="" class="form-control1">-->
+											<!--<option>Option 1</option>-->
+											<!--<option>Option 2</option>-->
+											<!--<option>Option 3</option>-->
+											<!--<option>Option 4</option>-->
+											<!--<option>Option 5</option>-->
+										<!--</select>-->
+									<!--</div>-->
+								<!--</div>-->
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <input type="submit" class="btn-primary btn" value="提交">
+                                        </div>
+                                    </div>
+                                </div>
+							</form>
+						</div>
+			 </div>
+{#            <div class="panel-footer">#}
+{#                <div class="row">#}
+{#                    <div class="col-sm-8 col-sm-offset-2">#}
+{#                        <button class="btn-primary btn">Submit</button>#}
+{#                        <input type="submit" class="btn-primary btn" value="提交">#}
+{#                            <button class="btn-default btn">Cancel</button>#}
+{#                            <button class="btn-inverse btn">Reset</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+  </div>
+{% endblock %}

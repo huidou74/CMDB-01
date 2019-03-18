@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <a href="/host/add/"> 添加主机 </a>
+        <a href="/reload_hosts/"> 一键获取数据 </a>
+    </div>
+    <table class="table table-bordered table-hover" id="table">
+    <h3> 当前主机的详细信息！ </h3>
+            <thead >
+                <tr>
+                    <th>    </th>
+                    <th>  主机名  </th>
+                    <th>  实例名  </th>
+                    <th>  CPU  </th>
+                    <th>  内存/G  </th>
+{#                    <th>  磁盘  </th>#}
+                    <th>  带宽/M  </th>
+                    <th>  登录端口  </th>
+                    <th>  公网IP  </th>
+{#                    <th>  私网IP  </th>#}
+                    <th>  主机状态 </th>
+                    <th>  内核版本  </th>
+                     <th>  操作系统  </th>
+                    <th>  来源IP  </th>
+{#                    <th>  创建时间  </th>#}
+{#                    <th>  到期时间  </th>#}
+{#                    <th>  所属用户  </th>#}
+                    <th>  标签  </th>
+{#                    <th>  SN  </th>#}
+{#                    <th>  备注  </th>#}
+                    <th>地区</th>
+                    <th>编辑</th>
+                    <th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for host in hosts_page %}
+                    <tr>
+                        <td>{{ host.id }}</td>
+                        <td>{{ host }}</td>
+                        <td> {{ host.ecsname }} </td>
+                        <td> {{ host.cpu }} </td>
+                        <td> {{ host.mem }} </td>
+    {#                    <td> {{ disk }} </td>#}
+                        <td> {{ host.speed }} </td>
+                        <td> {{ host.login_port }} </td>
+                        <td> {{ host.eth1_network }} </td>
+    {#                    <td> {{ host.eth0_network }} </td>#}
+                        <td> {{ host.get_state_display  }} </td>
+                        <td> {{ host.kernel }} </td>
+                        <td> {{ host.os }} </td>
+                        <td> {{ host.source }} </td>
+    {#                    <td> {{ host.createtime }} </td>#}
+    {#                    <td> {{ host.expirytime }} </td>#}
+    {#                    <td> {{ login }} </td>#}
+                        <td> {{ host.lab }} </td>
+    {#                    <td> {{ host.sn }} </td>#}
+    {#                    <td> {{ host.remarks }} </td>#}
+                        <td>{{ host.region }}</td>
+                        <td><a href="/host/edit/{{ host.id }}"> 编辑 </a></td>
+{#                        # (\d+) 因为我url里写了匹配数字，所以这里直接可以写成"/host/edit/{{ host.id }}"#}
+                        <td><a href="/host/del?id={{ host.id }}"> 删除 </a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table >
+{#     #分页的开始   以下使用的django 提供的 Paginator#}
+     <ul class="pagination">
+                {% if hosts_page.has_previous %}
+            <li class="previous"><a href="/host/list/?page={{hosts_page.previous_page_number}}">上一页</a></li>
+        {% else %}
+            <li class="previous disavled"><a>上一页</a></li>
+        {% endif %}
+
+        {% for num in p.page_range %}
+
+            {% if num == page %}
+               <li class="item active"><a href="/host/list/?page={{ num }}">{{ num }}</a></li>
+
+            {% else %}
+               <li class="item"><a href="/host/list/?page={{ num }}">{{ num }}</a></li>
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% if hosts_page.has_next %}
+             <li class="next"><a href="/host/list/?page={{ hosts_page.next_page_number }}">下一页</a></li>
+        {% else %}
+             <li class="next disabled"><a >下一页</a></li>
+        {% endif %}
+     </ul>
+{#    <br>#}
+{#    <table class="table table-bordered table-hover" id="table">#}
+{#            <thead >#}
+{#                <tr>#}
+{#                    <th>  操作系统  </th>#}
+{#                    <th>  来源IP  </th>#}
+{#                    <th>  创建时间  </th>#}
+{#                    <th>  到期时间  </th>#}
+{#                    <th>  所属用户  </th>#}
+{#                    <th>  标签  </th>#}
+{#                    <th>  SN  </th>#}
+{#                    <th>  备注  </th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#                <tr>#}
+{#                    <td> {{ host_list.os }} </td>#}
+{#                    <td> {{ host_list.source }} </td>#}
+{#                    <td> {{ host_list.createtime }} </td>#}
+{#                    <td> {{ host_list.expirytime }} </td>#}
+{#                    <td> {{ login }} </td>#}
+{#                    <td> {{ host_list.lab }} </td>#}
+{#                    <td> {{ host_list.sn }} </td>#}
+{#                    <td> {{ host_list.remarks }} </td>#}
+{#                </tr>#}
+{#            </tbody>#}
+{#     </table>#}
+
+{% endblock %}

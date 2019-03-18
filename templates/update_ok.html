@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>修改成功！</h3>
+    <p>修改的用户信息如下： </p>
+    <p>你的用户名是  ： {{ user }}</p>
+    <p>你的新密码是  ： {{ passwd }}</p>
+    <p>返回登录 <a href="/login/"><button>登录</button></a></p>
+{% endblock %}

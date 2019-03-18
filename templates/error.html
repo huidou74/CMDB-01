@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>！--- < 登录异常提示 > --- ！</h2>
+    <p>{{ error }} </p>
+    <br>
+    <p>返回登录页面  ---->   <a href="/login/"><button>登录</button></a>   <----   </p>
+    <br>
+    <p>返回注册页面 ---->   <a href="/register/"><button>注册</button></a>   <----   </p>
+    <br>
+    <p>返回修改密码页面 ---->   <a href="/update/"><button>修改密码</button></a>   <----   </p>
+    <br>
+    <p>返回删除用户页面 ---->   <a href="/delete/"><button>删除用户</button></a>   <----   </p>
+{% endblock %}

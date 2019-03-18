@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>注册用户</h2>
+
+    <form method='POST' novalidate>
+        {% csrf_token %}
+        <p> 用户名:  {{form.username}} {{form.errors.username.0}} </p>
+        <p> 密码:    {{form.password}}  {{form.errors.password.0}} </p>
+        <p> 确认密码: {{form.password_again}}  {{form.errors.password_again.0}} </p>
+        <input type='submit' vlaue='提交' />
+    </form>
+{#    <form method="post">#}
+{#        <p>注册用户名</p><input type="text" name="username">#}
+{#        <p>用户名密码</p><input type="password" name="password">#}
+{#        <p>确认密码</p>  <input type="password" name="password_ture">#}
+{#        <p>   ---->  <input type="submit" value="提交">  <---- </p>#}
+{#    </form>#}
+{% endblock %}

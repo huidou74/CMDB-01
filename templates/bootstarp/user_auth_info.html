@@ -1,0 +1,155 @@
+
+{% extends './main.html' %}
+{% block user_auth_info %}
+    {% load staticfiles %}
+    <br>
+    <div class="grids" style="background: #fff;overflow: hidden; padding:2em; height: 1064px;">
+
+        <div class=" row mb40">
+        <div class=" row mb40">
+        <div class="bs-example">
+            <div class="col-md-4">
+                <h3> 用户头像： <img src="{% static '' %}{{ img }}" alt=""> </h3>
+            </div>
+        </div>
+        </div>
+        <div class=" row mb40">
+        <div class="bs-example">
+
+            <div class="col-md-4">
+                <h3>权限用户名： {{ userinfo }} </h3>
+            </div>
+            <div class="col-md-4">
+                <h3>岗位职责名： {{ pos }} </h3>
+            </div>
+        </div>
+        </div>
+
+        <div class="bs-example">
+
+        <div class="col-md-4">
+
+            <div class="dropdown">
+			            <a href="#" title="" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
+			                <i class="fa fa-group"> 权限组</i>
+			                <i class="fa fa-chevron-down icon_8"></i>
+			            <div class="ripple-wrapper"></div></a>
+			            <ul class="dropdown-menu float-right">
+                            {% for k in dict_a.keys %}
+			                <li>
+			                    <a title="">
+                                        <i class="fa fa-check-square-o">{{ k }}</i>
+			                    </a>
+			                </li>
+                                <li role="separator" class="divider"></li>
+                            {% endfor %}
+
+			            </ul>
+			        </div>
+
+            </div>
+
+
+        <div class="col-md-4">
+
+            <div class="dropdown">
+			            <a href="#" title="" class="btn btn-default" data-toggle="dropdown" aria-expanded="false">
+			                <i class=" fa fa-plane"> 对应权限 </i>
+			                <i class="fa fa-chevron-down icon_8"></i>
+			            <div class="ripple-wrapper"></div></a>
+			            <ul class="dropdown-menu float-right">
+                            {% for v in dict_a.values %}
+			                <li>
+			                    <a title="">
+                                    {% for i in v %}
+                                         <i class="fa fa fa-dot-circle-o">{{ i }}</i>
+                                    {% endfor %}
+			                    </a>
+			                </li>
+                                <li role="separator" class="divider"></li>
+                            {% endfor %}
+
+			            </ul>
+			        </div>
+
+        </div>
+
+        </div>
+                </div>
+    </div>
+    <script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-main").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop();
+				if(scrollpos >=navoffeset){
+					$(".header-main").addClass("fixed");
+				}else{
+					$(".header-main").removeClass("fixed");
+				}
+			 });
+		});
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    <div class="agile-grids">#}
+{#    <div class="agile-tables">#}
+{##}
+{#        <div class="w3l-table-info">#}
+{#            <table id="table">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th>权限组</th>#}
+{#                    <th>相应权限</th>#}
+{##}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                <tr>#}
+{#                    {% for k in dict_a.keys %}#}
+{#                    <td>{{ k }}</td>#}
+{#                    {% endfor %}#}
+{#                    {% for v in dict_a.values %}#}
+{#                        {% for i in v %}#}
+{#                            <td>{{ i }}</td>#}
+{#                            <td>  1</td>#}
+{#                        {% endfor %}#}
+{##}
+{#                    {% endfor %}#}
+{#                </tr>#}
+{#                </tbody>#}
+{#            </table>#}
+{#            {% for k in dict_a.keys %}#}
+{#                <input class="form-control" id="disabledInput" type="text" placeholder="{{ k }}" disabled>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div class="col-md-6">#}
+{#            {% for  v in dict_a.values %}#}
+{#                {% for i in v %}#}
+{#                    <input class="form-control" id="disabledInput" type="text" placeholder="{{ i }}" disabled>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>CMDB Login</title>
+<link href="{% static 'css/style1.css'%}" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- -->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="{% static 'js/jquery.min.js'%}'"></script>
+<script>$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
+{#    <style>#}
+{#       .user-name{#}
+{#           width: 30%;#}
+{#           float:left;#}
+{#           line-height:50px;#}
+{#           margin-bottom: 12px#}
+{#       }#}
+{#    </style>#}
+</head>
+<body>
+<!-- contact-form -->	
+<div class="message warning">
+<div class="inset">
+	<div class="login-head">
+		<h1>欢迎登录 梁永辉 的 CMDB 系统</h1>
+		 <div class="alert-close"> </div> 			
+	</div>
+    {% block form %}
+
+    {% endblock %}
+    {% block auto_form %}
+
+    {% endblock %}
+
+
+{#		<form method='POST' novalidate>#}
+{#            {% csrf_token %}#}
+{#            <div class="user-name ">用户名:</div>#}
+{##}
+{#			<li>#}
+{#                {{form.username}}#}
+{#				<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>#}
+{#			</li>{{form.errors.username.0}}#}
+{#				<div class="clear"> </div>#}
+{#            <div class="user-name ">密码:</div>#}
+{#			<li>#}
+{#                {{form.password}}#}
+{#				<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>#}
+{#			</li>{{form.errors.password.0}}#}
+{#           <div class="user-name "> 确认密码:</div>#}
+{#            <li>#}
+{#                {{form.password_again}}#}
+{#            </li>{{form.errors.password_again.0}}#}
+{##}
+{#			<div class="clear"> </div>#}
+{#			<div class="submit">#}
+{#				<input type="submit"  value="登录" >#}
+{#				<h4><a href="#">Lost your Password ?</a></h4>#}
+{#						  <div class="clear">  </div>	#}
+{#			</div>#}
+{#				#}
+{#		</form>#}
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+<!--- footer --->
+
+
+</body>
+</html>

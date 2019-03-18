@@ -1,0 +1,176 @@
+{%  extends 'bootstarp/main.html' %}
+{% block timing %}
+    <br>
+    <div class="grid-form1" style="height: 1500px;">
+  	      <h3>发布系统 - 定时发布</h3>
+
+        <div class="grids" style="background: #fff;overflow: hidden; padding:1em;  ">
+           <form method='get' role='form' novalidate>
+            <label style="color: #8e44ad">设置任务： </label>
+            <br>
+            <br>
+            <label style="color: #dec800">测试发布：</label>
+            <div class=" row mb41">
+                <div class="bs-example">
+                    {% csrf_token %}
+                        <div class="col-md-3">
+                        <label>X：</label><input type="text" name="x">
+                        </div>
+                        <div class="col-md-1">
+                            +
+                        </div>
+                        <div class="col-md-3">
+                        <label>Y：</label><input type="text" name="y">
+                        </div>
+                </div>
+            </div>
+        <br>
+            <label style="color: #00bcd4">发布应用：</label>
+            <div class=" row mb40">
+                    <div class="bs-example">
+                        <div class="col-md-4">
+                            <label>对应发布的应用名：</label>
+                            {% csrf_token %}
+                            <input type="text" name="apps">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>发布到的使用环境: </label>
+                            <select  name="envs">
+                            {% for i in envss %}
+                                <option value="{{ i.name }}"> {{ i.name }}</option>
+                            {% endfor %}
+                             </select>
+                        </div>
+                    </div>
+            <p>注： 测试环境对应用 'app_code' . 生产环境对应用 'game_code'</p>
+            </div>
+
+            <br>
+            <label style="color: #FC8213">定时设置： </label>
+                <div class=" row mb41">
+                    <div class="bs-example">
+                        <div class="col-md-2">
+                            <label>年:</label><input type="text" name="year">
+                        </div>
+                        <div class="col-md-2">
+                            <label>月:</label><input type="text" name="month">
+                        </div>
+                        <div class="col-md-2">
+                            <label>日:</label> <input type="text" name="day">
+                        </div>
+                        <div class="col-md-2">
+                            <label>时:</label> <input type="text" name="hour">
+                        </div>
+                        <div class="col-md-2">
+                            <label>分:</label> <input type="text" name="minute">
+                        </div>
+                            {{ error }}
+                </div>
+            </div>
+            <hr>
+            <label style="color: #8BC34A">设置几分钟后： </label>
+                <div class=" row mb41">
+                <div class="bs-example">
+                    <br>
+                        <div class="col-md-2">
+                            <label >几分钟后：</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="after">{{ after_error }}
+                        </div>
+                </div>
+                </div>
+            <hr>
+            <label style="color: #cd0a0a">修改已启动的任务： </label>
+                <div class=" row mb41">
+                <div class="bs-example">
+                    <br>
+                    <div class="col-md-4">
+                        <label>取消这个任务：</label><input type="text"  name="cancel">
+                    </div>
+                    <div class="col-md-4">
+                        <label>结果：</label><input type="text" value="{{ cancel_tag }}">
+                    </div>
+                </div>
+                </div>
+            <label style="color: #cd0a0a">或者： </label>
+                <div class=" row mb41">
+                <div class="bs-example">
+                    <div class="col-md-4">
+                        <label>中止这个任务：</label><input type="text" name="stop">
+                    </div>
+                    <div class="col-md-4">
+                        <label>结果：</label><input type="text" value="{{ stop_tag }}">
+                    </div>
+                </div>
+                </div>
+        <hr>
+                <div class=" row mb41">
+                <div class="bs-example">
+                    <div class="col-md-4">
+                        <label style="color: #00aced">总表单提交 ： </label>
+                        <input type="submit"  class="btn-primary btn" value="提交 ALL">
+                    </div>
+                    <div class="col-md-6">
+                        <label style="color: #399834">结果返回的ID：</label><input type="text" value="{{ num }} "style="height: 36px;width: 380px;">
+                    </div>
+                </div>
+                </div>
+            </form>
+
+           <hr>
+
+    <label style="color: #00aced">查询结果： </label>
+            <form method='post' role='form' novalidate>
+            <div class=" row mb41">
+                    <div class="bs-example">
+
+                        <div class="col-md-5">
+                        {% csrf_token %}
+                        <label> I D ：</label>
+                            <input type="text" name='id' style="height: 36px;width: 380px;">
+                        </div>
+                        <div class="col-md-2">
+                        <select name="forget">
+                            <option value="cat"> 查看该条任务 </option>
+                            <option value=""> 清除该条任务 </option>
+                        </select>
+                        </div>
+                        <div class="col-md-3">
+                        <input type="submit"  class="btn-primary btn" value="提交">
+                        </div>
+                    </div>
+                    </div>
+                    <div class=" row mb41">
+                         <div class="bs-example">
+                        <div class="col-md-4">
+                        <label>结果:</label>
+                            <input type="text" value="{{ data }}" style="height: 36px;width:300px;">
+                        </div>
+                         </div>
+                    </div>
+            </form>
+
+            <label style="color: #dec800">返回的结果:</label>
+                <textarea class="form-control2" rows="15">{{ jg }}</textarea>
+{#                <input type="text" value="{{ jg }}" style="width: 1250px; height: 220px;">#}
+
+{#        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >#}
+{#          <div class="modal-dialog modal-sm" role="document" style=" margin-top: 130px; ">#}
+{#            <div class="modal-content">#}
+{#              <div class="modal-header">#}
+{#                    <h3 class="modal-title" id="mySmallModalLabel" > 推送任务 </h3>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <p style="color: #9b58b5">后台正在推送主机数据。</p>#}
+{#                    <p style="color: #68AE00">Loading.... </p>#}
+{#                    <p style="color: darkorange">请稍后！ </p>#}
+{#                </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+    </div>
+    </div>
+
+{% endblock %}

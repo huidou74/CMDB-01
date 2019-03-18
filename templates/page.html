@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>  云主机名  </th>
+                        <th>  云实例ID  </th>
+                        <th>  CPU  </th>
+                        <th>  内存  </th>
+                        <th>  带宽  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in hosts_page %}
+                        <tr>
+                            <td><a href="/host/messages/?all={{ item.hostname }}">{{ item.hostname }}</a></td>
+                            <td>{{ item.ecsname }}</td>
+                            <td>{{ item.cpu }}</td>
+                            <td>{{ item.mem }}</td>
+                            <td>{{ item.speed }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <ul class="pagination">
+                {% if hosts_page.has_previous %}
+            <li class="previous"><a href="/host/?page={{hosts_page.previous_page_number}}">上一页</a></li>
+        {% else %}
+            <li class="previous disavled"><a>上一页</a></li>
+        {% endif %}
+
+
+        {% for num in p.page_range %}
+
+            {% if num == page %}
+               <li class="item active"><a href="/host/?page={{ num }}">{{ num }}</a></li>
+
+            {% else %}
+               <li class="item"><a href="/host/?page={{ num }}">{{ num }}</a></li>
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% if hosts_page.has_next %}
+             <li class="next"><a href="/host/?page={{ hosts_page.next_page_number }}">下一页</a></li>
+        {% else %}
+             <li class="next disabled"><a >下一页</a></li>
+         {% endif %}
+            </ul>
+    </div>
+{% endblock %}

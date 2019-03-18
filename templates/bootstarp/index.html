@@ -1,0 +1,51 @@
+{% extends './main.html' %}
+{% load staticfiles %}
+{% block index %}
+    <br>
+    <div class="grids" style="background: #fff;overflow: hidden; padding:2em">
+    <div class=" row mb40">
+        <div class="col-md-6">
+            <div class=" bg-success dark pv20 text-white fw600 text-center">
+                你的用户名是： {{ username }}
+            </div>
+            <div class="bg-success dark pv20 text-white fw600 text-center">
+                你的密码是  ： {{ password }}
+            </div>
+        <div class="bg-alert pv20 text-white fw600 text-center">修改用户密码：   <a href="/update/"><button>点击修改密码</button></a></div>
+        <div class="bg-alert pv20 text-white fw600 text-center">找回用户密码：   <a href="/reload/"><button>点击找回密码</button></a></div>
+        <div class="bg-alert pv20 text-white fw600 text-center">删除用户信息：   <a href="/delete/"><button>点击删除用户</button></a></div>
+
+    </div>
+
+      <div class="col-md-6 " >
+            <div>
+                <div class="bg-system lightabc pv20 text-white fw600 text-center" >来了，老弟！   今日自拍，爱你呦<br>
+                <img src="{% static "./images/lc.png" %}"  height=315 width=205 />
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grids" style="background: #fff;overflow: hidden;">
+    <div class=" row mb40">
+
+    <div class="col-md-6">
+
+        <div class="bg-danger dark pv20 text-white fw600 text-center">查看所有主机的信息( 新 )：   <a href="/host/list/"><button>Go Hosts</button></a></div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="bg-danger dark pv20 text-white fw600 text-center">查看所有主机的信息( 旧 )：   <a href="/host/"><button>Go Hosts</button></a></div>
+     </div>
+
+        <div class="col-md-12">
+            <div class="bg-danger dark pv20 text-white fw600 text-center">查看所有的用户信息：   <a href="/user/list/"><button>点击查看</button></a></div>
+        </div>
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}

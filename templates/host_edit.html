@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method='post' role='form' novalidate >
+    {% csrf_token %}
+    <p id='hsotname'>主机名: {{form.hostname}} {{form.errors.hostname.0}}</p>
+    <p id='ecsname'>实例名: {{form.ecsname}} {{form.errors.ecsname.0}}</p>
+    <p id='login_port'>登录端口: {{form.login_port}} {{form.errors.login_port.0}}</p>
+    <p id='cpu'>CPU: {{form.cpu}} {{form.errors.cpu.0}}</p>
+    <p id='mem'>内存/G: {{form.mem}} {{form.errors.mem.0}}</p>
+    <p id='speed'>带宽/M: {{form.speed}} {{form.errors.speed.0}}</p>
+    <p id='eth1_network'>公网IP: {{form.eth1_network}} {{form.errors.eth1_network.0}}</p>
+    <p id='eth0_network'>内网IP: {{form.eth0_network}} {{form.errors.eth0_network.0}}</p>
+    <p id='sn'>SN: {{form.sn}} {{form.errors.sn.0}}</p>
+    <p id='kernel'>内核: {{form.kernel}} {{form.errors.kernel.0}}</p>
+    <p id='remarks'>备注: {{form.remarks}} {{form.errors.remarks.0}}</p>
+    <p id='createtime'>创建时间: {{form.createtime}} {{form.errors.createtime.0}}</p>
+    <p id='expirytime'>到期时间: {{form.expirytime}} {{form.errors.expirytime.0}}</p>
+    <p id='state'>主机状态: {{form.state}} {{form.errors.state.0}} {{ message }}</p>
+
+    <p id='lab'>标签: {{form.lab_id}} {{form.errors.lab_id.0}}</p>
+    <p id='os'>操作系统: {{form.os_id}} {{form.errors.os_id.0}}</p>
+    <p id='source'>来源类型: {{form.source_id}} {{form.errors.source_id.0}}</p>
+    <p id='region'>所属区域: {{form.region_id}} {{form.errors.region_id.0}}</p>
+
+    <input type='submit' value='提交'>
+</form>
+{% endblock %}

@@ -1,0 +1,223 @@
+{% extends 'bootstarp/main.html' %}
+{% block tables %}
+<div class="agile-grids">
+<div class="agile-tables">
+<h3>主机列表</h3>
+
+    <div class=" row mb40">
+    <div class="bs-example">
+        <div class="col-md-6">
+            {% if '/host/add/' in request.permission_code_list %}
+            <a href="/host/add/"> <button type="button" class="btn btn-success">添加主机</button> </a>
+            <a href="/reload_hosts/">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">API 一键获取数据</button>
+            </a>
+            {% endif %}
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+                      <div class="modal-dialog modal-sm" role="document" style=" margin-top: 130px; ">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                                <h3 class="modal-title" id="mySmallModalLabel" > API 获取主机数据 </h3>
+                            </div>
+                            <div class="modal-body">
+                                <p style="color: #9b58b5">后台正在获取其他主机数据。</p>
+                                <p style="color: #68AE00">Loading.... </p>
+                                <p style="color: darkorange">请稍后！ </p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+        </div>
+
+
+
+        <div class="col-md-6">
+            <form method="get">
+                {% csrf_token %}
+                <select name="form">
+                    {% for i in list_tab %}
+                    <option value="{{ i }}">{{ i }}</option>
+
+                    {% endfor %}
+                </select>
+                <input type="text" name="q">
+                <input type="submit" class="btn btn-info" value="提交">
+                {{ error }}
+            </form>
+
+        </div>
+        </div>
+    </div>
+        <div class="w3l-table-info">
+            <table id="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>主机名</th>
+                <th>实例名</th>
+                <th>CPU</th>
+                <th>内存/G</th>
+{#                    <th>  磁盘  </th>#}
+                <th>带宽/M</th>
+                <th>  登录端口  </th>
+                <th>  公网IP  </th>
+{#                    <th>  私网IP  </th>#}
+                <th>  主机状态 </th>
+                <th>  内核版本  </th>
+                 <th>  操作系统  </th>
+                <th>  来源IP  </th>
+{#                    <th>  创建时间  </th>#}
+{#                    <th>  到期时间  </th>#}
+{#                    <th>  所属用户  </th>#}
+{#                            <th>  标签  </th>#}
+{#                    <th>  SN  </th>#}
+{#                    <th>  备注  </th>#}
+                <th>地区</th>
+                  {% if '/host/update/(\d+)/' in request.permission_code_list %}
+                <th>编辑</th>
+                  {% endif %}
+                 {% if '/host/delete/(\d+)/' in request.permission_code_list %}
+                <th>删除</th>
+                  {% endif %}
+              </tr>
+            </thead>
+            {% if obj_list %}
+                <tbody>
+                {% for host in obj_list %}
+                    <tr>
+                        <td>{{ host.id }}</td>
+                        <td><a href="/host/messages/{{ host.id }}/">{{ host }}</a></td>
+                        <td> {{ host.ecsname }} </td>
+                        <td> {{ host.cpu }} </td>
+                        <td> {{ host.mem }} </td>
+
+                        <td> {{ host.speed }} </td>
+                        <td> {{ host.login_port }} </td>
+                        <td> {{ host.eth1_network }} </td>
+
+                        <td> {{ host.get_state_display  }} </td>
+                        <td> {{ host.kernel }} </td>
+                        <td> {{ host.os }} </td>
+                        <td> {{ host.source }} </td>
+
+                        <td>{{ host.region }}</td>
+                         {% if '/host/update/(\d+)/' in request.permission_code_list %}
+                         <td><a href="/host/update/{{ host.id }}/"> <button type="button" class="btn btn-warning " >编辑</button> </a></td>
+                         {% endif %}
+                         {% if '/host/delete/(\d+)/' in request.permission_code_list %}
+                            <td><a href="javascript:if(confirm('确实要删除吗?'))location='/host/delete/{{ host.id }}/'"><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" >删除</button></a>
+                         {% endif %}
+                    </tr>
+             {% endfor %}
+                </tbody>
+            {% else %}
+            <tbody>
+             {% for host in hosts_page %}
+             <tr>
+                <td>{{ host.id }}</td>
+                <td><a href="/host/messages/{{ host.id }}/">{{ host }}</a></td>
+                <td> {{ host.ecsname }} </td>
+                <td> {{ host.cpu }} </td>
+                <td> {{ host.mem }} </td>
+{#                    <td> {{ disk }} </td>#}
+                <td> {{ host.speed }} </td>
+                <td> {{ host.login_port }} </td>
+                <td> {{ host.eth1_network }} </td>
+{#                    <td> {{ host.eth0_network }} </td>#}
+                <td> {{ host.get_state_display  }} </td>
+                <td> {{ host.kernel }} </td>
+                <td> {{ host.os }} </td>
+                <td> {{ host.source }} </td>
+{#                    <td> {{ host.createtime }} </td>#}
+{#                    <td> {{ host.expirytime }} </td>#}
+{#                    <td> {{ login }} </td>#}
+{#                            <td> {{ host.lab }} </td>#}
+{#                    <td> {{ host.sn }} </td>#}
+{#                    <td> {{ host.remarks }} </td>#}
+                <td>{{ host.region }}</td>
+                 {% if '/host/update/(\d+)/' in request.permission_code_list %}
+                 <td><a href="/host/update/{{ host.id }}/"> <button type="button" class="btn btn-warning " >编辑</button> </a></td>
+                 {% endif %}
+{#                        # (\d+) 因为我url里写了匹配数字，所以这里直接可以写成"/host/edit/{{ host.id }}"#}
+                 {% if '/host/delete/(\d+)/' in request.permission_code_list %}
+{#                     <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" onclick="show('/host/delete?id={{ i.id }}')">删除</button>#}
+                    <td><a href="javascript:if(confirm('确实要删除吗?'))location='/host/delete/{{ host.id }}/'"><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" >删除</button></a>
+{#                     <td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" onclick="{{ host.id }}">删除</button>#}
+{#                    <div class="modal fade " id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#                        <div class="modal-dialog">#}
+{#                            <div class="modal-content">#}
+{#                                <div class="modal-header">#}
+{#                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">#}
+{#                                        &times;#}
+{#                                    </button>#}
+{#                                    <h4 class="modal-title" id="myModalLabel">#}
+{#                                        请确认是否删除#}
+{#                                    </h4>#}
+{#                                </div>#}
+{#                                <div class="modal-body">#}
+{#                                    <input type="hidden" id="id" name="id" value="">#}
+{#                                    <input type="" name="dateId" id="dateId" value="" >#}
+{#                                    是否删除#}
+{#                                </div>#}
+{#                                <div class="modal-footer">#}
+{#                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>#}
+{#                                    <button type="button" class="btn btn-danger" onclick="submit();" >确定</button>#}
+{#                                </div>#}
+{#                            </div><!-- /.modal-content -->#}
+{#                        </div><!-- /.modal -->#}
+{#                    </div>#}
+{#                 </td>#}
+{#                     <script>#}
+{#                       var href = '';#}
+{#                       function show(url){#}
+{#                           href = url;#}
+{#                           alert(url);#}
+{#                       }#}
+{#                       function submit(){#}
+{#                           location.href = href;#}
+{#                       }#}
+{#                    </script>#}
+                 {% endif %}
+              </tr>
+             {% endfor %}
+
+            </tbody>
+            {% endif %}
+          </table>
+        </div>
+    {% if not obj_list %}
+    <div class="left-content row">
+
+      <div class=" col-md-8 col-md-offset-8">
+          <nav aria-label="...">
+      <ul class="pagination pagination pagination-lg">
+
+          {% if hosts_page.has_previous %}
+        <li ><a href="/host/list/?page={{hosts_page.previous_page_number}}" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+          {% else %}
+         <li class="disabled"><a><span aria-hidden="true">«</span></a></li>
+          {% endif %}
+
+      {% for num in p.page_range %}
+
+          {% if hosts_page.number == num %}
+        <li class="active"><a href="/host/list/?page={{ num }}"> {{ num }} </a></li>
+           {% else %}
+        <li ><a href="/host/list/?page={{ num }}">{{ num }} </a></li>
+           {% endif %}
+      {% endfor %}
+
+      {% if hosts_page.has_next %}
+        <li ><a href="/host/list/?page={{ hosts_page.next_page_number }}" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+      {% else %}
+          <li class="disabled"><a ><span aria-hidden="true">»</span></a></li>
+      {% endif %}
+      </ul>
+    </nav>
+      </div>
+    </div>
+    {% endif %}
+    </div>
+ </div>
+{% endblock %}
+

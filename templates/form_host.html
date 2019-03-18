@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method='post' novalidate  role='form' >
+    {% csrf_token %}
+    <p id='hsotname'>阿里主机名: {{form.hostname}} {{form.errors.hostname.0}}</p>
+    <p id='ecsname'>实例ID: {{form.ecsname}} {{form.errors.ecsname.0}}</p>
+    <p id='cpu'>CPU: {{form.cpu}} {{form.errors.cpu.0}}</p>
+    <p id='mem'>内存/G: {{form.mem}} {{form.errors.mem.0}}</p>
+    <p id='speed'>带宽/M: {{form.speed}} {{form.errors.speed.0}}</p>
+    <p id='network'>IP: {{form.network}} {{form.errors.network.0}}</p>
+    <p id='source'>来源类型: {{form.source_id}} {{form.errors.source_id.0}}</p>
+    <p id='region'>所属区域: {{form.region_id}} {{form.errors.region_id.0}}</p>
+
+    <input type='submit' value='提交'>
+</form>
+{% endblock %}

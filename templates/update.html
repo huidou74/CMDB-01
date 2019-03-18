@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>通过用户名和用户名来修改该用户的密码操作</h3>
+    <form method="post">
+        <p>请输入您的用户名： </p><input type="text" name="name">
+        <p>请输入您原始的密码： </p><input type="password" name="old_passwd">
+        <p>请输入修改的新密码： </p><input type="password" name="new_passwd">
+        <p>   ---->  <input type="submit" value="提交">  <---- </p>
+
+    </form>
+{% endblock %}

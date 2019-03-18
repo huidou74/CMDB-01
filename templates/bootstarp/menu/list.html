@@ -1,0 +1,28 @@
+{%  extends 'bootstarp/main.html' %}
+{% block menu_list %}
+
+    <div class="agile-grids">
+    <div class="agile-tables">
+       <div class="w3l-table-info">
+            <h3>菜单列表</h3>
+          <table id="table">
+          <thead>
+             <tr>
+                 <th>菜单</th>
+             </tr>
+          </thead>
+          <tbody>
+                {% for i in menu_jg1 %}
+                    <tr>
+                <td>{{ i }}</td>
+                    </tr>
+                {% endfor %}
+          </tbody>
+
+          </table>
+       </div>
+    </div>
+    </div>
+
+
+{% endblock %}

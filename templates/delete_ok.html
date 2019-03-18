@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>删除成功！</h3>
+    <p>删除的用户信息如下：</p>
+    <p>用户名：  {{ user }}</p>
+    <p>密码：    {{ passwd }} </p>
+    <p>原密码：   {{ password }}</p>
+    <p>返回登录 <a href="/login/"><button>登录</button></a></p>
+{% endblock %}

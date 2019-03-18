@@ -1,0 +1,73 @@
+{%  extends 'bootstarp/main.html' %}
+{% block right_away %}
+<br>
+    <div class="grid-form1">
+  	      <h3>发布系统 - 立即发布</h3>
+
+        <div class="grids" style="background: #fff;overflow: hidden; padding:1em; height: 1064px;">
+        <p>注： 测试环境对应用 'app_code' </p>
+        <p>注： 生产环境对应用 'game_code' </p>
+            <div class=" row mb40">
+                <form method='post' role='form' novalidate>
+                    <div class="bs-example">
+                        <div class="col-md-4">
+                            <label>对应发布的应用名：</label>
+                            {% csrf_token %}
+                            <input type="text" name="app">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>发布到的使用环境: </label>
+                            <select  name="env">
+                            {% for i in envs %}
+                                <option value="{{ i.name }}"> {{ i.name }}</option>
+                            {% endfor %}
+                             </select>
+                        </div>
+
+                        <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">提交</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+                                  <div class="modal-dialog modal-sm" role="document" style=" margin-top: 130px; ">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                            <h3 class="modal-title" id="mySmallModalLabel" > 推送任务 </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p style="color: #9b58b5">后台正在推送主机数据。</p>
+                                            <p style="color: #68AE00">Loading.... </p>
+                                            <p style="color: darkorange">请稍后！ </p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+             <br>
+            <div class=" row mb40">
+                <div class="bs-example">
+                    <div class="col-md-5">
+                        <label>执行结果返回信息 : </label>
+                    <br>
+
+                        <textarea class="form-control" rows="15">
+                            {% if jgs %}
+                                {{ jgs }}
+                            {% else %}
+                                None
+                            {% endif %}
+                        </textarea>
+{#                    <input type="text" value="{{ jgs }}"  style=" width: 1100px; height: 350px;">#}
+                    </div>
+
+                </div>
+                <p>结果的返回信息对应我的版本库 github 地址: <a href="https://github.com/huidou74/huidou/blob/master/test.txt"> huidou</a></p>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

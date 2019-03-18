@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+{#    1、配置默认选中，只需在对应选项中加上属性 selected； #}
+{#    2、使用django模板语法 {% if condition %} selected {% endif %} ，当为所要选项时，加上属性 selected。 #}
+    <h3>修改数据页面</h3>
+    <table >
+            <thead class="table table-bordered table-hover" id="table">
+                <tr>
+                    <th>    </th>
+                    <th>  主机名  </th>
+                    <th>  实例名  </th>
+                    <th>  CPU  </th>
+                    <th>  内存  </th>
+                    <th>  磁盘  </th>
+                    <th>  带宽  </th>
+                    <th>  登录端口  </th>
+                    <th>  公网IP  </th>
+                    <th>  私网IP  </th>
+                    <th>  主机状态 </th>
+                    <th>  内核版本  </th>
+                </tr>
+            </thead>
+                        <tbody>
+                <tr>
+                    <td>{{ host_obj.id }}</td>
+                    <td>{{ host_obj }}</td>
+                    <td> {{ host_obj.ecsname }} </td>
+                    <td> {{ host_obj.cpu }} </td>
+                    <td> {{ host_obj.mem }} </td>
+                    <td> <a href="/host/messages/update_db/attr/?all={{ host_obj }}&attr={{ disk }}&value=Disk">{{ disk }}</a></td>
+                    <td> {{ host_obj.speed }} </td>
+                    <td> {{ host_obj.login_port }} </td>
+                    <td> {{ host_obj.eth1_network }} </td>
+                    <td> {{ host_obj.eth0_network }} </td>
+                    <td> {{ host_obj.get_state_display }} </td>
+                    <td> {{ host_obj.kernel }} </td>
+                </tr>
+            </tbody>
+    </table >
+    <br>
+    <table >
+            <thead class="table table-bordered table-hover" id="table">
+                <tr>
+                    <th>  操作系统  </th>
+                    <th>  来源IP  </th>
+                    <th>  创建时间  </th>
+                    <th>  到期时间  </th>
+                    <th>  所属用户  </th>
+                    <th>  标签  </th>
+                    <th>  SN  </th>
+                    <th>  备注  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <a href="/host/messages/update_db/attr/?all={{ name }}&attr={{ os }}&value=Os">{{ host_obj.os }}</a> </td>
+                    <td> <a href="/host/messages/update_db/attr/?all={{ name }}&attr={{ source }}&value=Source">{{ host_obj.source }}</a> </td>
+                    <td> {{ host_obj.createtime }} </td>
+                    <td> {{ host_obj.expirytime }} </td>
+                    <td> <a href="/host/messages/update_db/attr/?all={{ name }}&attr={{ login }}&value=Login">{{ login }}</a> </td>
+                    <td> <a href="/host/messages/update_db/attr/?all={{ name }}&attr={{ lab }}&value=Lable">{{ host_obj.lab }}</a> </td>
+                    <td> {{ host_obj.sn }} </td>
+                    <td> {{ host_obj.remarks }} </td>
+                </tr>
+            </tbody>
+     </table>
+    <br>
+    <form method="post">
+    <label>选择更改的属性： </label>
+    <select name="class">
+        {% for i in attr %}
+            <option value="{{ i.id }}"{% if i.name == 'host' %} selected {% endif %}>{{ i.name }}</option>
+        {% endfor %}
+    </select>
+        {% csrf_token %}
+        <p>填写修改的内容： <input type="text" name="message"> <input type="submit" value="确认"> </p>
+    </form>
+    <br>
+    <p>注：  特殊信息字段的修改，需要点击该信息进入再选择要修改的对象</p>
+{% endblock %}

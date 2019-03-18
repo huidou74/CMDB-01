@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form method="POST">
+    {% csrf_token %}
+    <p>用户名</p><input type="text" name="username">
+    <p>密码</p><input type="password" name="password">
+    <p>   ---->  <input type="submit" value="提交">  <---- </p>
+    </form>
+
+{%  endblock %}
